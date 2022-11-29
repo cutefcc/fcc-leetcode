@@ -58,7 +58,24 @@
 function isPalindrome(x: number): boolean {
   // 是否回文
   // 解法1，转为string，在反转，和最初进行比较
+  //   if (x < 0) return false;
+  //   return Number(x.toString().split("").reverse().join("")) === x;
+  // 解法2，利用中间数组将x的每一位存储起来，在利用双指针判断前后是否相等
+  // 负数都判定为非回文
   if (x < 0) return false;
-  return Number(x.toString().split("").reverse().join("")) === x;
+  let temp: number[] = [];
+  while (x) {
+    let last: number = x % 10;
+    temp.push(last);
+    x = (x - last) / 10;
+  }
+  let left = 0,
+    right = temp.length - 1;
+  while (left <= right) {
+    if (temp[left++] !== temp[right--]) {
+      return false;
+    }
+  }
+  return true;
 }
 // @lc code=end
