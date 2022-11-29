@@ -71,12 +71,12 @@ function twoSum(nums: number[], target: number): number[] {
   //   }
   //   return [];
   // 解法2: O(n) 利用map 保存每一个元素及其 index，再计算后面元素和目标元素直接的diff，再在map里面去找是否有这个diff
-  const map = new Map();
+  const map = new Map<number, number>();
   for (let i = 0; i < nums.length; i++) {
     const num = nums[i];
     const diff = target - num;
     if (map.has(diff)) {
-      return [map.get(diff), i];
+      return [<number>map.get(diff), i];
     }
     map.set(num, i);
   }
