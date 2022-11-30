@@ -73,7 +73,6 @@ function mergeTwoLists(
   function insert(head: ListNode, val: number) {
     const target = new ListNode(val, null);
     let root = head;
-    const pre = head;
     // 首位插入
     if (head.val >= val) {
       target.next = head;
