@@ -70,41 +70,58 @@ function mergeTwoLists(
   list1: ListNode | null,
   list2: ListNode | null
 ): ListNode | null {
-  function insert(head: ListNode, val: number) {
-    const target = new ListNode(val, null);
-    let root = head;
-    // 首位插入
-    if (head.val >= val) {
-      target.next = head;
-      return target;
-    }
-    // 中间插入 or 尾部插入
-    while (root) {
-      if (!root.next && root.val <= val) {
-        root.next = target;
-        return head;
-      }
-      if (root.next) {
-        if (root.val <= val && root.next.val >= val) {
-          let temp = root.next;
-          root.next = target;
-          target.next = temp;
-          return head;
-        } else {
-          root = root.next;
-        }
-      }
-    }
+  // 解法1 ，暴力：将list1 中的元素一个一个的插入到list2当中 O(n^2)
+  //   function insert(head: ListNode, val: number) {
+  //     const target = new ListNode(val, null);
+  //     let root = head;
+  //     // 首位插入
+  //     if (head.val >= val) {
+  //       target.next = head;
+  //       return target;
+  //     }
+  //     // 中间插入 or 尾部插入
+  //     while (root) {
+  //       if (!root.next && root.val <= val) {
+  //         root.next = target;
+  //         return head;
+  //       }
+  //       if (root.next) {
+  //         if (root.val <= val && root.next.val >= val) {
+  //           let temp = root.next;
+  //           root.next = target;
+  //           target.next = temp;
+  //           return head;
+  //         } else {
+  //           root = root.next;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   if (!list1 && !list2) return null;
+  //   if (!list1 && list2) return list2;
+  //   if (list1 && !list2) return list1;
+  //   let root = list1;
+  //   let res = list2;
+  //   while (root) {
+  //     res = insert(res, root.val);
+  //     root = root.next;
+  //   }
+  //   return res
+  // 解法2:递归  O(n+m)
+  // 1. 递归终止条件
+  if (list1 === null) {
+    return list2;
   }
-  if (!list1 && !list2) return null;
-  if (!list1 && list2) return list2;
-  if (list1 && !list2) return list1;
-  let root = list1;
-  let res = list2;
-  while (root) {
-    res = insert(res, root.val);
-    root = root.next;
+  if (list2 === null) {
+    return list1;
   }
-  return res;
+  // 2. 递归过程
+  if (list1.val < list2.val) {
+    list1.next = mergeTwoLists(list1.next, list2);
+    return list1;
+  } else {
+    list2.next = mergeTwoLists(list1, list2.next);
+    return list2;
+  }
 }
 // @lc code=end
