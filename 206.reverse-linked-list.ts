@@ -67,21 +67,21 @@
 
 function reverseList(head: ListNode | null): ListNode | null {
   // 引入额外空间数组
-  //   let listArr: ListNode[] = [];
-  //   let root = head;
-  //   if (!head) return null;
-  //   while (root) {
-  //     listArr.push(root);
-  //     root = root.next;
-  //   }
-  //   for (let i = 0; i < listArr.length; i++) {
-  //     if (i === 0) {
-  //       listArr[i].next = null;
-  //     } else {
-  //       listArr[i].next = listArr[i - 1];
-  //     }
-  //   }
-  //   return listArr[listArr.length - 1];
-  // 不引入额外数组
+  let listArr: ListNode[] = [];
+  let root = head;
+  if (!head) return null;
+  while (root) {
+    listArr.push(root);
+    root = root.next;
+  }
+  for (let i = 0; i < listArr.length; i++) {
+    if (i === 0) {
+      listArr[i].next = null;
+    } else {
+      listArr[i].next = listArr[i - 1];
+    }
+  }
+  return listArr[listArr.length - 1];
+  //   不引入额外数组
 }
 // @lc code=end
