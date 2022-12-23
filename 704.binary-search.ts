@@ -50,14 +50,27 @@
 
 // @lc code=start
 function search(nums: number[], target: number): number {
-  // 二分查找
+  // 二分查找 - 左闭右闭 [] 写法
+  //   let l = 0;
+  //   let r = nums.length - 1;
+  //   while (l <= r) {
+  //     let midd = Math.floor((l + r) / 2);
+  //     if (nums[midd] > target) {
+  //       r = midd - 1;
+  //     } else if (nums[midd] < target) {
+  //       l = midd + 1;
+  //     } else {
+  //       return midd;
+  //     }
+  //   }
+  //   return -1;
+  // 二分查找 - 左闭右开 [)
   let l = 0;
-  let r = nums.length - 1;
-
-  while (l <= r) {
+  let r = nums.length;
+  while (l < r) {
     let midd = Math.floor((l + r) / 2);
     if (nums[midd] > target) {
-      r = midd - 1;
+      r = midd;
     } else if (nums[midd] < target) {
       l = midd + 1;
     } else {
