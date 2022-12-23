@@ -85,6 +85,7 @@
 
 // @lc code=start
 function removeElement(nums: number[], val: number): number {
+  // 移除重复元素，并返回剩余的元素个数
   const numsLen: number = nums.length;
   let deleteCount: number = 0;
   let currIndex: number = 0;
