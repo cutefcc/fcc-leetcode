@@ -86,17 +86,25 @@
 // @lc code=start
 function removeElement(nums: number[], val: number): number {
   // 移除重复元素，并返回剩余的元素个数
-  const numsLen: number = nums.length;
-  let deleteCount: number = 0;
-  let currIndex: number = 0;
-  while (nums[currIndex] !== undefined) {
-    if (nums[currIndex] === val) {
-      deleteCount++;
-      nums.splice(currIndex, 1);
-    } else {
-      currIndex++;
+  // const numsLen: number = nums.length;
+  // let deleteCount: number = 0;
+  // let currIndex: number = 0;
+  // while (nums[currIndex] !== undefined) {
+  //   if (nums[currIndex] === val) {
+  //     deleteCount++;
+  //     nums.splice(currIndex, 1);
+  //   } else {
+  //     currIndex++;
+  //   }
+  // }
+  // return numsLen - deleteCount;
+  // 不使用 splice
+  let k: number = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[k++] = nums[i];
     }
   }
-  return numsLen - deleteCount;
+  return k;
 }
 // @lc code=end
