@@ -67,21 +67,35 @@
 
 function reverseList(head: ListNode | null): ListNode | null {
   // 引入额外空间数组
-  let listArr: ListNode[] = [];
-  let root = head;
-  if (!head) return null;
-  while (root) {
-    listArr.push(root);
-    root = root.next;
-  }
-  for (let i = 0; i < listArr.length; i++) {
-    if (i === 0) {
-      listArr[i].next = null;
-    } else {
-      listArr[i].next = listArr[i - 1];
-    }
-  }
-  return listArr[listArr.length - 1];
+  // let listArr: ListNode[] = [];
+  // let root = head;
+  // if (!head) return null;
+  // while (root) {
+  //   listArr.push(root);
+  //   root = root.next;
+  // }
+  // for (let i = 0; i < listArr.length; i++) {
+  //   if (i === 0) {
+  //     listArr[i].next = null;
+  //   } else {
+  //     listArr[i].next = listArr[i - 1];
+  //   }
+  // }
+  // return listArr[listArr.length - 1];
   //   不引入额外数组
+  if (!head) return null;
+  let root = head;
+  let pre = root;
+  let curr = pre.next;
+  while (curr) {
+    let next = curr.next; // 临时存储后一个节点
+    curr.next = pre; // 反转指针
+
+    pre = curr; // pre 后移
+    curr = next; // curr 后移
+  }
+  root.next = null; // 头节点要指向null
+  // 处理完后，pre变成新的头节点
+  return pre;
 }
 // @lc code=end
