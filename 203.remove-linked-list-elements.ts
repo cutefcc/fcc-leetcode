@@ -66,7 +66,7 @@ function removeElements(head: ListNode | null, val: number): ListNode | null {
   if (head === null) {
     return null;
   }
-  const root = new ListNode(0, head); // 在head前面添加一个辅助节点
+  const root = new ListNode(0, head); // 在head前面添加一个辅助节点，也可以叫虚拟头节点
   let pre = root;
   let curr = pre.next;
   while (curr) {
