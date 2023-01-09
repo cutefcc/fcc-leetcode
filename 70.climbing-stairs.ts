@@ -58,8 +58,15 @@ function climbStairs(n: number): number {
   //   if (n === 2) return 2;
   //   return climbStairs(n - 1) + climbStairs(n - 2);
   // 需要优化，定义一个map 将计算过的值存起来，得到一个时间复杂度 O(n) 空间复杂度O(n) 的算法
-  let map = {};
-  function climb(x: number, obj) {
+  let map: {
+    [m: number]: number;
+  } = {};
+  function climb(
+    x: number,
+    obj: {
+      [m: number]: number;
+    }
+  ) {
     if (x <= 3) return x;
     if (!!obj[x]) {
       return obj[x];
