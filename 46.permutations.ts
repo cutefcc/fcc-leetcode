@@ -40,6 +40,7 @@
 
 // @lc code=start
 function permute(nums: number[]): number[][] {
+  // 全排列 - 回溯
   const res: number[][] = [],
     path: number[] = [];
   backtracking(nums, nums.length, []);
