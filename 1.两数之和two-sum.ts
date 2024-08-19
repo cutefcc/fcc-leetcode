@@ -76,10 +76,13 @@ function twoSum(nums: number[], target: number): number[] {
     const num = nums[i];
     const diff = target - num;
     if (map.has(diff)) {
+      // 返回的是index
       return [<number>map.get(diff), i];
     }
+    // 保存每一个元素（作为key）及其 index（作为值）
     map.set(num, i);
   }
   return [];
 }
+
 // @lc code=end
