@@ -77,49 +77,49 @@ function Monkey(name) {
 Monkey("Alan").eat("Banana").sleep(4).eat("Apple").sleep(5).eat("Pear");
 
 // 解法2 纯 Callback 队列中存放所有任务，执行机制为：取出队头任务，执行完任务调用 next 继续取。头直到队列为空
-class _LazyMan2 {
-  constructor(name) {
-    this.queue = [
-      () => {
-        console.log(`Hi! This is ${name}!`);
-        this.next();
-      },
-    ];
-    setTimeout(() => this.next(), 0);
-  }
-  next() {
-    let task = this.queue.shift();
-    if (task) {
-      task.call(this);
-    }
-  }
-  sleep(delay) {
-    this.queue.push(() => {
-      setTimeout(() => {
-        console.log(`Wake up after ${delay}`);
-        this.next();
-      }, delay * 1000);
-    });
-    return this;
-  }
-  eat(sth) {
-    this.queue.push(() => {
-      console.log(`Eat ${sth}`);
-      this.next();
-    });
-    return this;
-  }
-  //   sleepFirst(delay) {
-  //     this.queue.unshift(() => {
-  //       setTimeout(() => {
-  //         console.log(`Wake up after ${delay}`);
-  //         this.next();
-  //       }, delay * 1000);
-  //     });
-  //     return this;
-  //   }
-}
-function LazyMan(name) {
-  return new _LazyMan2(name);
-}
-LazyMan("Alan").eat("Banana").sleep(4).eat("Apple").sleep(5).eat("Pear");
+// class _LazyMan2 {
+//   constructor(name) {
+//     this.queue = [
+//       () => {
+//         console.log(`Hi! This is ${name}!`);
+//         this.next();
+//       },
+//     ];
+//     setTimeout(() => this.next(), 0);
+//   }
+//   next() {
+//     let task = this.queue.shift();
+//     if (task) {
+//       task.call(this);
+//     }
+//   }
+//   sleep(delay) {
+//     this.queue.push(() => {
+//       setTimeout(() => {
+//         console.log(`Wake up after ${delay}`);
+//         this.next();
+//       }, delay * 1000);
+//     });
+//     return this;
+//   }
+//   eat(sth) {
+//     this.queue.push(() => {
+//       console.log(`Eat ${sth}`);
+//       this.next();
+//     });
+//     return this;
+//   }
+//   //   sleepFirst(delay) {
+//   //     this.queue.unshift(() => {
+//   //       setTimeout(() => {
+//   //         console.log(`Wake up after ${delay}`);
+//   //         this.next();
+//   //       }, delay * 1000);
+//   //     });
+//   //     return this;
+//   //   }
+// }
+// function LazyMan(name) {
+//   return new _LazyMan2(name);
+// }
+// LazyMan("Alan").eat("Banana").sleep(4).eat("Apple").sleep(5).eat("Pear");
