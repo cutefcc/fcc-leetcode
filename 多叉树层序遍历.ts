@@ -1,3 +1,5 @@
+// 需求：多叉树层序遍历，也就是将城市打平输出
+
 interface IList {
   name: string;
   children?: IList[];
