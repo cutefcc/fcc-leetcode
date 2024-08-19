@@ -66,6 +66,7 @@
 
 function rightSideView(root: TreeNode | null): number[] {
   // 理解题意：输出二叉树右视图
+  // 给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
   // 思路：层序遍历，每一次收集最右边的元素
   let res: number[] = []; // 结果数组
   if (root === null) {
@@ -83,6 +84,7 @@ function rightSideView(root: TreeNode | null): number[] {
       if (node.right !== null) {
         queue.push(node.right); // 入队
       }
+      // 关键点：识别当前层的最后一个节点
       if (i === size - 1) {
         //将当前层的最后一个节点放入结果列表
         res.push(node.val);
