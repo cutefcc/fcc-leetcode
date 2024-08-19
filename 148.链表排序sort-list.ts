@@ -65,11 +65,21 @@
  * }
  */
 
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+// 用空间换时间，先放入数组，再排序，再连接
 function sortList(head: ListNode | null): ListNode | null {
   if (!head) return null;
   // 第一种方式，需要额外的空间
   let arr: ListNode[] = [];
-  let cur: ListNode = head;
+  let cur: ListNode | null = head;
   while (cur) {
     arr.push(cur);
     cur = cur.next;
@@ -83,5 +93,39 @@ function sortList(head: ListNode | null): ListNode | null {
     }
   }
   return arr[0];
+}
+
+// 用归并排序，不需要额外的空间 时间复杂度始终为 O(n log n)
+function sortList2(head: ListNode | null): ListNode | null {
+  if (!head || !head.next) return head;
+  let slow: ListNode | null = head;
+  let fast: ListNode | null = head;
+  let pre: ListNode | null = null;
+  while (fast && fast.next) {
+    pre = slow;
+    slow = slow!.next;
+    fast = fast.next.next;
+  }
+  pre!.next = null;
+  let l1 = sortList2(head);
+  let l2 = sortList2(slow);
+  return merge(l1, l2);
+}
+
+function merge(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+  let dummy = new ListNode();
+  let cur = dummy;
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      cur.next = l1;
+      l1 = l1.next;
+    } else {
+      cur.next = l2;
+      l2 = l2.next;
+    }
+    cur = cur.next!;
+  }
+  cur.next = l1 ? l1 : l2;
+  return dummy.next;
 }
 // @lc code=end
